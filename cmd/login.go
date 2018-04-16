@@ -8,7 +8,6 @@ import (
 	"net/url"
 
 	"github.com/99designs/keyring"
-	analytics "github.com/segmentio/analytics-go"
 	"github.com/segmentio/aws-okta/lib"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/spf13/cobra"
@@ -68,17 +67,17 @@ func loginRun(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	if analyticsEnabled && analyticsClient != nil {
-		analyticsClient.Enqueue(analytics.Track{
-			UserId: username,
-			Event:  "Ran Command",
-			Properties: analytics.NewProperties().
-				Set("backend", backend).
-				Set("aws-okta-version", version).
-				Set("profile", profile).
-				Set("command", "login"),
-		})
-	}
+	// if analyticsEnabled && analyticsClient != nil {
+	// 	analyticsClient.Enqueue(analytics.Track{
+	// 		UserId: username,
+	// 		Event:  "Ran Command",
+	// 		Properties: analytics.NewProperties().
+	// 			Set("backend", backend).
+	// 			Set("aws-okta-version", version).
+	// 			Set("profile", profile).
+	// 			Set("command", "login"),
+	// 	})
+	// }
 
 	p, err := lib.NewProvider(kr, profile, opts)
 	if err != nil {

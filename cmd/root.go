@@ -69,25 +69,25 @@ func prerun(cmd *cobra.Command, args []string) {
 		log.SetLevel(log.DebugLevel)
 	}
 
-	if analyticsEnabled {
-		// set up analytics client
-		analyticsClient, _ = analytics.NewWithConfig(analyticsWriteKey, analytics.Config{
-			BatchSize: 1,
-		})
+	// if analyticsEnabled {
+	// 	// set up analytics client
+	// 	analyticsClient, _ = analytics.NewWithConfig(analyticsWriteKey, analytics.Config{
+	// 		BatchSize: 1,
+	// 	})
 
-		username = os.Getenv("USER")
-		analyticsClient.Enqueue(analytics.Identify{
-			UserId: username,
-			Traits: analytics.NewTraits().
-				Set("aws-okta-version", version),
-		})
-	}
+	// 	username = os.Getenv("USER")
+	// 	analyticsClient.Enqueue(analytics.Identify{
+	// 		UserId: username,
+	// 		Traits: analytics.NewTraits().
+	// 			Set("aws-okta-version", version),
+	// 	})
+	// }
 }
 
 func postrun(cmd *cobra.Command, args []string) {
-	if analyticsEnabled && analyticsClient != nil {
-		analyticsClient.Close()
-	}
+	// if analyticsEnabled && analyticsClient != nil {
+	// 	analyticsClient.Close()
+	// }
 }
 
 func init() {

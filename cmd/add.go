@@ -7,7 +7,6 @@ import (
 	log "github.com/Sirupsen/logrus"
 
 	"github.com/99designs/keyring"
-	analytics "github.com/segmentio/analytics-go"
 	"github.com/segmentio/aws-okta/lib"
 	"github.com/spf13/cobra"
 )
@@ -34,16 +33,16 @@ func add(cmd *cobra.Command, args []string) error {
 		log.Fatal(err)
 	}
 
-	if analyticsEnabled && analyticsClient != nil {
-		analyticsClient.Enqueue(analytics.Track{
-			UserId: username,
-			Event:  "Ran Command",
-			Properties: analytics.NewProperties().
-				Set("backend", backend).
-				Set("aws-okta-version", version).
-				Set("command", "add"),
-		})
-	}
+	// if analyticsEnabled && analyticsClient != nil {
+	// 	analyticsClient.Enqueue(analytics.Track{
+	// 		UserId: username,
+	// 		Event:  "Ran Command",
+	// 		Properties: analytics.NewProperties().
+	// 			Set("backend", backend).
+	// 			Set("aws-okta-version", version).
+	// 			Set("command", "add"),
+	// 	})
+	// }
 
 	// Ask username password from prompt
 	organization, err := lib.Prompt("Okta organization", false)
